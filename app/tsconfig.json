@@ -1,0 +1,64 @@
+{
+  "files": [
+    "next-env.d.ts",
+    "next.config.js",
+    "postcss.config.mjs",
+    "stylelint.config.mjs"
+  ],
+  "include": [
+    "src/**/*",
+    "tests/**/*",
+    ".next/types/**/*.ts",
+    ".storybook/**/*",
+    "vite.config.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "amplify",
+    "postgres",
+    "prisma",
+    "coverage",
+    "storybook-static",
+    "eslint.config.mjs"
+  ],
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "ES2024",
+    "lib": ["ES2024", "dom", "dom.iterable", "esnext"],
+    "module": "esnext",
+    "moduleResolution": "Bundler",
+    "moduleDetection": "auto",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "checkJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "isolatedModules": true,
+    "incremental": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowUmdGlobalAccess": false,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true,
+    "rootDir": ".",
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./*"]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  }
+}

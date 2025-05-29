@@ -1,0 +1,49 @@
+version: 1
+backend:
+  phases:
+    preBuild:
+      commands:
+        # - npm ci
+        - echo "🔧 Installing AWS CLI v2..."
+        # - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        # - unzip awscliv2.zip
+        # - sudo ./aws/install
+    build:
+      commands:
+        - echo "🚀 Invoking migrateFunction..."
+        # - >
+        #   aws lambda invoke \
+        #     --function-name amplify-nextjscognitosample-r-prismalambda6E22C383-J3mfFZzvrvLF \
+        #     --region ap-northeast-1 \
+        #     --payload '{}' \
+        #     response.json \
+        #     --cli-binary-format raw-in-base64-out
+
+        # - |
+        #   if grep -q '"statusCode": 200' response.json; then
+        #     echo "✅ Migration succeeded."
+        #   else
+        #     echo "❌ Migration failed. Halting build."
+        #     cat response.json
+        #     exit 1
+        #   fi
+        # build:
+        #   commands:
+        - npm ci --cache .npm --prefer-offline
+        #     - npx prisma generate
+        #     - npx prisma migrate deploy
+        - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
+frontend:
+  phases:
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - .next/cache/**/*
+      - .npm/**/*
+      - node_modules/**/*

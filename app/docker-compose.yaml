@@ -1,0 +1,45 @@
+services:
+  nextjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+      - '6006:6006'
+    volumes:
+      - .:/nextjs
+    stdin_open: true
+    tty: true
+
+  db:
+    image: postgres:17
+    ports:
+      - "5432:5432"
+    # restart: always
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - nextjs_postgres_store:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:9.3
+    restart: always
+    ports:
+      - 5433:80
+    volumes:
+      - ./postgres/servers.json:/pgadmin4/servers.json
+      - ./postgres/preferences.json:/pgadmin4/preferences.json
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=user@example.com
+      - PGADMIN_DEFAULT_PASSWORD=pgadmin
+      - PGADMIN_CONFIG_SERVER_MODE=False
+      - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
+      - PGADMIN_CONFIG_UPGRADE_CHECK_ENABLED=False
+      - PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=False
+    depends_on:
+      - db
+
+volumes:
+  nextjs_postgres_store:
