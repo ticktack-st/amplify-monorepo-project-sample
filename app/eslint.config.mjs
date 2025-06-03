@@ -51,11 +51,9 @@ export default [
       'tests/**/*.{js,mjs,jsx,ts,tsx}',
       '.storybook/**/*.{js,mjs,jsx,ts,tsx}',
       'next-env.d.ts',
-      'next.config.js',
+      'next.config.mjs',
       'postcss.config.mjs',
       'stylelint.config.mjs',
-      'next-env.d.ts',
-      'next.config.js',
       'vite.config.ts',
     ],
     plugins: {

@@ -10,7 +10,7 @@ export default {
     'storybook-static/**/*',
     //   '**/dist/**/*',
     //   'next-env.d.ts',
-    //   'next.config.js',
+    //   'next.config.mjs',
     //   'postcss.config.mjs',
     //   'stylelint.config.mjs',
     //   'eslint.config.mjs',

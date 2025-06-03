@@ -1,7 +1,7 @@
 {
   "files": [
     "next-env.d.ts",
-    "next.config.js",
+    "next.config.mjs",
     "postcss.config.mjs",
     "stylelint.config.mjs"
   ],
