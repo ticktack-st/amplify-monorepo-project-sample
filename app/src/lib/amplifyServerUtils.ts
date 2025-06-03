@@ -1,7 +1,6 @@
 import { createServerRunner } from '@aws-amplify/adapter-nextjs'
 
 const cognitoSetting = JSON.parse(process.env.COGNITO_DEFINITIONS || '{}')
-console.log('Cognito settings:', cognitoSetting)
 
 export const { runWithAmplifyServerContext, createAuthRouteHandlers } =
   createServerRunner({

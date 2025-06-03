@@ -51,7 +51,6 @@ export default async function Page() {
   // );
   // const poolDetail: DescribeUserPoolResponse = await signedFetch()
   const poolDetail = ''
-  // console.log("poolDetail", JSON.stringify(poolDetail, null, 4));
   const jsonString = JSON.stringify(poolDetail, undefined, 4)
   const pattern1 = /,/g
   const newStr1 = jsonString.replaceAll(pattern1, ',\n')
