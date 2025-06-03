@@ -26,9 +26,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
               {/* <!-- アクションボタン --> */}
               <div className="flex items-center space-x-4">
-                <Button className="inline-block rounded-md bg-gray-800 px-4 py-2 text-sm font-medium text-white hover:bg-gray-600">
-                  ログイン
-                </Button>
+                <Link href="/api/auth/sign-in">
+                  <Button className="inline-block rounded-md bg-gray-800 px-4 py-2 text-sm font-medium text-white hover:bg-gray-600">
+                    ログイン
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

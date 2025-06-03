@@ -13,7 +13,7 @@
 // import type { NextRequest } from 'next/server'
 
 import { Amplify } from 'aws-amplify'
-import { signInWithRedirect } from 'aws-amplify/auth'
+// import { signInWithRedirect } from 'aws-amplify/auth'
 // import { Hub } from "aws-amplify/utils";
 import Link from 'next/link'
 
@@ -77,7 +77,7 @@ Amplify.configure(configPoolA, {
 })
 
 export default function Page() {
-  signInWithRedirect()
+  // signInWithRedirect()
   // console.log("id token", session.tokens?.idToken);
   // console.log("access token", session.tokens?.accessToken);
   // const jwtdata = localStorage.getItem("CognitoIdentityServiceProvider.68gum8efm44fbnotgqvq3651jq.oauthPKCE");
