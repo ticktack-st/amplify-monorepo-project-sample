@@ -31,12 +31,12 @@ export const configPoolB: ResourcesConfig = {
   Auth: {
     Cognito: {
       userPoolId: 'ap-northeast-1_h59Uj2q34',
-      userPoolClientId: '7n84i7ncvb3096rq07q3pe4fk1',
+      userPoolClientId: '7jtbu9ifgk78onlqeajgnv8rvj',
       loginWith: {
         oauth: {
           domain:
             'ap-northeast-1h59uj2q34.auth.ap-northeast-1.amazoncognito.com',
-          scopes: ['openid'],
+          scopes: ['email', 'openid'],
           redirectSignIn: ['http://localhost:3000'],
           redirectSignOut: ['http://localhost:3000'],
           responseType: 'code',
