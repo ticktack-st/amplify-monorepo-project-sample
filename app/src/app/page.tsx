@@ -1,12 +1,16 @@
-'use client'
-
 import 'aws-amplify/auth/enable-oauth-listener'
+import { cookies } from 'next/headers'
 import Link from 'next/link'
-export default function Page() {
+
+export default async function Page() {
+  const cookieStore = await cookies()
+  const tenant = cookieStore.get('tenant')?.value ?? 'default'
+  console.log('Tenant:', tenant)
+
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="h-16">
-        <h1 className="mt-10 text-3xl font-bold">提出サイト</h1>
+        <h1 className="mt-10 text-3xl font-bold">{tenant}の提出サイト</h1>
       </div>
       <div className="m-10 flex flex-wrap justify-around">
         <div className="w-1/2 p-4">

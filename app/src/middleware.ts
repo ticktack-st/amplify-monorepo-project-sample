@@ -3,7 +3,19 @@ import { fetchAuthSession } from 'aws-amplify/auth/server'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function middleware(request: NextRequest) {
+  const hostname = request.headers.get('host') || ''
+  const subdomain = hostname.split('.')[0]
+
+  // テナント情報を request header や cookie に付与するなど
+  console.log('Subdomain:', subdomain)
   const response = NextResponse.next()
+  if (subdomain !== 'localhost:3000') {
+    response.cookies.set('tenant', subdomain || '')
+  } else if (subdomain === 'localhost:3000') {
+    return NextResponse.redirect(
+      new URL('https://test.localhost:3000/file-upload', request.url)
+    )
+  }
 
   const authenticated = await runWithAmplifyServerContext({
     nextServerContext: { request, response },
@@ -37,6 +49,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      */
-    '/|/((?!api|_next/static|_next/image|favicon.ico|login).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|login|file-upload).*)',
   ],
 }
