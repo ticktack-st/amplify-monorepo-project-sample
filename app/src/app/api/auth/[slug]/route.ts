@@ -1,7 +1,7 @@
 import { createAuthRouteHandlers } from '@/lib/amplifyServerUtils'
 
 export const GET = createAuthRouteHandlers({
-  redirectOnSignInComplete: '',
+  redirectOnSignInComplete: '/logged-in',
   redirectOnSignOutComplete: '/login',
 })
 

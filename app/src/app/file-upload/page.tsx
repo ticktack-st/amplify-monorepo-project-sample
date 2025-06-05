@@ -3,13 +3,13 @@
 import React, { useState } from 'react'
 
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
-import { Amplify } from 'aws-amplify'
+// import { Amplify } from 'aws-amplify'
 
-import { configPoolA } from '../configure'
+// import { configPoolA } from '../configure'
 
 import { Button } from '@/components/ui/button'
 
-Amplify.configure(configPoolA)
+// Amplify.configure(configPoolA)
 
 export default function Page() {
   return (
