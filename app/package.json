@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "httpsdev": "next dev --experimental-https",
     "lint": "stylelint '**/*.css' && next lint",
     "build": "stylelint '**/*.css' && ESLINT_USE_FLAT_CONFIG=true eslint -c eslint.config.mjs && next lint && next build",
     "testbuild": "next build",
