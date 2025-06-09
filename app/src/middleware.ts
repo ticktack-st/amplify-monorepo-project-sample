@@ -11,10 +11,10 @@ export async function middleware(request: NextRequest) {
   const response = NextResponse.next()
   if (subdomain !== 'localhost:3000') {
     response.cookies.set('tenant', subdomain || '')
-  } else if (subdomain === 'localhost:3000') {
-    return NextResponse.redirect(
-      new URL('https://test.localhost:3000/file-upload', request.url)
-    )
+    // } else if (subdomain === 'localhost:3000') {
+    //   return NextResponse.redirect(
+    //     new URL('https://test.localhost:3000/file-upload', request.url)
+    //   )
   }
 
   const authenticated = await runWithAmplifyServerContext({
@@ -37,7 +37,7 @@ export async function middleware(request: NextRequest) {
     return response
   }
 
-  return NextResponse.redirect(new URL('/login', request.url))
+  // return NextResponse.redirect(new URL('/login', request.url))
 }
 
 export const config = {
