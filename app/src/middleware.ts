@@ -5,23 +5,16 @@ import { NextRequest, NextResponse } from 'next/server'
 export async function middleware(request: NextRequest) {
   const hostname = request.headers.get('host') || ''
   const subdomain = hostname.split('.')[0]
-
   // テナント情報を request header や cookie に付与するなど
-  console.log('Subdomain:', subdomain)
   const response = NextResponse.next()
-  if (subdomain !== 'localhost:3000') {
-    response.cookies.set('tenant', subdomain || '')
-    // } else if (subdomain === 'localhost:3000') {
-    //   return NextResponse.redirect(
-    //     new URL('https://test.localhost:3000/file-upload', request.url)
-    //   )
-  }
 
   const authenticated = await runWithAmplifyServerContext({
     nextServerContext: { request, response },
     operation: async (contextSpec) => {
       try {
-        const session = await fetchAuthSession(contextSpec)
+        const session = await fetchAuthSession(contextSpec, {
+          forceRefresh: true,
+        })
         return (
           session.tokens?.accessToken !== undefined &&
           session.tokens?.idToken !== undefined
@@ -32,6 +25,39 @@ export async function middleware(request: NextRequest) {
       }
     },
   })
+  console.log('Authenticated_middle:', authenticated)
+
+  // // テナント情報を request header や cookie に付与するなど
+  // const response = NextResponse.next()
+  // if (subdomain !== 'localhost:3000') {
+  //   response.cookies.set('tenant', subdomain || '')
+  // } else if (subdomain === 'test') {
+  if (
+    subdomain === 'test' &&
+    request.nextUrl.pathname.startsWith('/logged-in')
+  ) {
+    return NextResponse.redirect(
+      new URL('https://test.test.localhost:3000/file-upload', request.url)
+    )
+  }
+
+  // const authenticated = await runWithAmplifyServerContext({
+  //   nextServerContext: nextContext,
+  //   operation: async (contextSpec) => {
+  //     try {
+  //       const session = await fetchAuthSession(contextSpec, {
+  //         forceRefresh: true,
+  //       })
+  //       return (
+  //         session.tokens?.accessToken !== undefined &&
+  //         session.tokens?.idToken !== undefined
+  //       )
+  //     } catch (error) {
+  //       return false
+  //     }
+  //   },
+  // })
+  // console.log('Authenticated_middle:', authenticated)
 
   if (authenticated) {
     return response
