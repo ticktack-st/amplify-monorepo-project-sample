@@ -8,13 +8,14 @@ services:
       - '6006:6006'
     volumes:
       - .:/nextjs
+    # command: ['npm', 'run', 'dev']
     stdin_open: true
     tty: true
 
   db:
     image: postgres:17
     ports:
-      - "5432:5432"
+      - '5432:5432'
     # restart: always
     environment:
       - POSTGRES_DB=postgres
@@ -40,6 +41,23 @@ services:
       - PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=False
     depends_on:
       - db
+
+  cypress:
+    build:
+      context: .
+      dockerfile: Dockerfile-cypress
+    environment:
+      CYPRESS_BASE_URL: http://nextjs:3000
+    volumes:
+      - ./cypress/test:/e2e
+      - ./cypress/results:/results
+    entrypoint: ''
+    command: ['/bin/bash']
+    # command: ["npx","cypress","run"]
+    depends_on:
+      - nextjs
+    stdin_open: true
+    tty: true
 
 volumes:
   nextjs_postgres_store:
