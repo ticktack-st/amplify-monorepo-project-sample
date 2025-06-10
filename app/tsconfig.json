@@ -18,6 +18,7 @@
     "postgres",
     "prisma",
     "coverage",
+    "cypress",
     "storybook-static",
     "eslint.config.mjs"
   ],
