@@ -15,4 +15,7 @@ RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     truncate -s 0 /var/log/*log
 COPY cypress/test/package*.json .
+RUN npm install -g npm \
+    && npm install -g npm-check-updates \
+    && npm install -g typescript
 RUN npm install
