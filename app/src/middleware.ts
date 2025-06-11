@@ -63,7 +63,7 @@ export async function middleware(request: NextRequest) {
     return response
   }
 
-  // return NextResponse.redirect(new URL('/login', request.url))
+  return NextResponse.redirect(new URL('/login', request.url))
 }
 
 export const config = {
