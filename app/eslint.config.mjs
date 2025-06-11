@@ -15,6 +15,7 @@ export default [
       'node_modules/**/*',
       'prisma/**/*',
       'coverage/**/*',
+      'cypress/**/*',
       'storybook-static/**/*',
       '**/dist/**/*',
       'eslint.config.mjs',
