@@ -3,6 +3,7 @@ const nextConfig = {
   eslint: {
     dirs: ['src/'],
   },
+  serverExternalPackages: ['pino'],
 }
 
 export default nextConfig
