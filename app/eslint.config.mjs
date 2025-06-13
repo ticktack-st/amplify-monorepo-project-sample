@@ -76,6 +76,7 @@ export default [
     rules: {
       ...eslintPluginUnicorn.configs.recommended.rules,
       'unicorn/prevent-abbreviations': 'off',
+      'unicorn/no-null': 'off',
       'unicorn/filename-case': [
         'error',
         {
