@@ -5,7 +5,6 @@ import Link from 'next/link'
 export default async function Page() {
   const cookieStore = await cookies()
   const tenant = cookieStore.get('tenant')?.value ?? 'default'
-  console.log('Tenant:', tenant)
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
