@@ -18,13 +18,14 @@ export const config = {
 }
 
 export async function middleware(request: NextRequest) {
-  const response = NextResponse.next()
+  // ログの一貫性を持たせるためRequestIdを設定
   const requestId = uuidv4()
-  response.headers.set('x-request-id', requestId)
-
+  request.headers.set('x-request-id', requestId)
+  const response = NextResponse.next({ request: request })
+  console.log('res %o', response)
   writeRequestInfoLog(request, requestId)
 
-  // 未ログイン時のリダイレクト先ページは除外する
+  // 未ログイン時のリダイレクトはスキップ
   if (request.nextUrl.pathname.startsWith('/login')) {
     return response
   }

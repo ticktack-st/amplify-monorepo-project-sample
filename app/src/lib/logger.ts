@@ -1,6 +1,10 @@
 import pino from 'pino'
 
 const isProd = process.env.NODE_ENV === 'production'
+// const frontendOrigin = process.env.NEXT_PUBLIC_FRONTEND_ORIGIN
+const frontendOrigin =
+  process.env.NEXT_PUBLIC_FRONTEND_ORIGIN || 'http://localhost:3000'
+const LOG_URL = `${frontendOrigin}/api/log`
 
 // ログに含めないフィールドを指定
 const redactParams = [
@@ -70,3 +74,29 @@ const pinoConfig = (() => {
 })()
 
 export const logger = pino(pinoConfig)
+
+// クライアント側のログ出力設定
+// ブラウザで発生したログをサーバーに送信するための設定
+// ブラウザのコンソールには出力しない
+export const clientLogger = pino({
+  level: 'info',
+  timestamp: pino.stdTimeFunctions.isoTime,
+  browser: {
+    write: () => {},
+    transmit: {
+      send: (level, logEvent) => {
+        const messages = logEvent.messages
+        // ミドルウェアではnavigator.sendBeaconは使用できないため、keepalive:true の fetch を使用
+        // TODO: fetch laterも検討する
+        void fetch(LOG_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ level, messages }),
+          keepalive: true,
+        })
+      },
+    },
+  },
+})
