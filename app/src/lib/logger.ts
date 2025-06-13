@@ -1,6 +1,7 @@
 import pino from 'pino'
 
 const isProd = process.env.NODE_ENV === 'production'
+const isEdge = process.env.NEXT_RUNTIME === 'edge'
 // const frontendOrigin = process.env.NEXT_PUBLIC_FRONTEND_ORIGIN
 const frontendOrigin =
   process.env.NEXT_PUBLIC_FRONTEND_ORIGIN || 'http://localhost:3000'
@@ -42,8 +43,19 @@ const pinoCommonConfig = {
   },
   timestamp: pino.stdTimeFunctions.isoTime,
   browser: {
-    asObject: true,
-    serialize: true,
+    // asObject: true,
+    // serialize: true,
+    ...(isEdge && {
+      write: {
+        info: (o: object) => console.log(JSON.stringify(o)),
+        error: (o: object) => console.error(JSON.stringify(o)),
+        warn: (o: object) => console.warn(JSON.stringify(o)),
+        debug: (o: object) => console.debug(JSON.stringify(o)),
+        trace: (o: object) => console.trace(JSON.stringify(o)),
+        fatal: (o: object) => console.error(JSON.stringify(o)),
+        critical: (o: object) => console.error(JSON.stringify(o)),
+      },
+    }),
   },
   redact: redactParams,
 }
