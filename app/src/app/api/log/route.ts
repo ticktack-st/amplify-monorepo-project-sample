@@ -2,7 +2,6 @@ import { logger } from '@/lib/logger'
 import type { NextRequest } from 'next/server'
 
 export async function POST(request: NextRequest) {
-  console.log('log request %o', request)
   logger.info({ message: 'Logging request' })
 
   const data = await request.json()

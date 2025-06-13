@@ -22,7 +22,6 @@ export async function middleware(request: NextRequest) {
   const requestId = uuidv4()
   request.headers.set('x-request-id', requestId)
   const response = NextResponse.next({ request: request })
-  console.log('res %o', response)
   writeRequestInfoLog(request, requestId)
 
   // 未ログイン時のリダイレクトはスキップ

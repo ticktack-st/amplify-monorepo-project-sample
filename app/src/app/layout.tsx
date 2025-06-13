@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
-import { runWithAmplifyServerContext } from '@/lib/amplifyServerUtils'
-import { fetchAuthSession } from 'aws-amplify/auth/server'
-import { cookies } from 'next/headers'
+// import { runWithAmplifyServerContext } from '@/lib/amplifyServerUtils'
+// import { fetchAuthSession } from 'aws-amplify/auth/server'
+// import { cookies } from 'next/headers'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import './globals.css'
@@ -11,18 +11,19 @@ export default async function RootLayout({
 }: {
   children: ReactNode
 }) {
-  const authenticated = await runWithAmplifyServerContext({
-    nextServerContext: { cookies },
-    operation: async (contextSpec) => {
-      try {
-        const session = await fetchAuthSession(contextSpec, {})
-        return session.tokens !== undefined
-      } catch {
-        return false
-      }
-    },
-  })
-  console.log('Authenticated:', authenticated)
+  // const authenticated = await runWithAmplifyServerContext({
+  //   nextServerContext: { cookies },
+  //   operation: async (contextSpec) => {
+  //     try {
+  //       const session = await fetchAuthSession(contextSpec, {})
+  //       return session.tokens !== undefined
+  //     } catch {
+  //       return false
+  //     }
+  //   },
+  // })
+  // console.log('Authenticated:', authenticated)
+  const authenticated = true // 仮の値。実際には認証状態を確認する必要があります。
 
   return (
     <html lang="ja">
