@@ -2,10 +2,10 @@ import 'aws-amplify/auth/enable-oauth-listener'
 import { headers } from 'next/headers'
 import ClientSample from './clientSample'
 
-const header = await headers()
-const requestId = header.get('x-request-id') || 'unknown-request-id'
+export default async function Page() {
+  const header = await headers()
+  const requestId = header.get('x-request-id') || 'unknown-request-id'
 
-export default function Page() {
   return (
     <>
       <ClientSample requestId={requestId} />
