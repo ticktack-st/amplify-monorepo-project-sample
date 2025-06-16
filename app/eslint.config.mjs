@@ -55,7 +55,7 @@ export default [
       'next.config.mjs',
       'postcss.config.mjs',
       'stylelint.config.mjs',
-      'vite.config.ts',
+      'vitest.config.ts',
     ],
     plugins: {
       eslint: eslint,
