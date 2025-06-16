@@ -39,3 +39,12 @@ amplifyconfiguration*
 
 # vscode
 .vscode/
+
+# CDK
+infra/*.js
+!jest.config.js
+infra/*.d.ts
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
