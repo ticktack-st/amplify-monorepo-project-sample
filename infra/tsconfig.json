@@ -1,7 +1,6 @@
 {
-  "exclude": ["node_modules", "cdk.out"],
+  "exclude": ["node_modules", "cdk.out", "coverage", "eslint.config.mjs"],
   "compileOnSave": false,
-
   "compilerOptions": {
     "target": "ES2024",
     "lib": ["ES2024"],

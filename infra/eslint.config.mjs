@@ -55,6 +55,7 @@ export default [
       ...tseslint.configs.strict.rules,
       ...tseslint.configs.stylistic.rules,
       ...eslintCdkPlugin.configs.strict.rules,
+      'cdk/require-jsdoc': 'off',
     },
   },
   {
