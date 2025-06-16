@@ -1,0 +1,9 @@
+services:
+  cdk:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/cdk
+    stdin_open: true
+    tty: true
