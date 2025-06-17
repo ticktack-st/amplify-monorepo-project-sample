@@ -36,24 +36,48 @@ const pinoCommonConfig = {
   },
   formatters: {
     level: (label: string) => {
-      return {
-        level: label,
-      }
+      return { logLevel: label.toUpperCase() }
     },
   },
   timestamp: pino.stdTimeFunctions.isoTime,
   browser: {
-    // asObject: true,
-    // serialize: true,
     ...(isEdge && {
       write: {
-        info: (o: object) => console.log(JSON.stringify(o)),
-        error: (o: object) => console.error(JSON.stringify(o)),
-        warn: (o: object) => console.warn(JSON.stringify(o)),
-        debug: (o: object) => console.debug(JSON.stringify(o)),
-        trace: (o: object) => console.trace(JSON.stringify(o)),
-        fatal: (o: object) => console.error(JSON.stringify(o)),
-        critical: (o: object) => console.error(JSON.stringify(o)),
+        info: (o: object) => {
+          const { level } = o as Record<string, string>
+          const logMessage = { ...o, logLevel: level?.toUpperCase() }
+          console.log(JSON.stringify(logMessage))
+        },
+        error: (o: object) => {
+          const { level } = o as Record<string, string>
+          const logMessage = { ...o, logLevel: level?.toUpperCase() }
+          console.error(JSON.stringify(logMessage))
+        },
+        warn: (o: object) => {
+          const { level } = o as Record<string, string>
+          const logMessage = { ...o, logLevel: level?.toUpperCase() }
+          console.warn(JSON.stringify(logMessage))
+        },
+        debug: (o: object) => {
+          const { level } = o as Record<string, string>
+          const logMessage = { ...o, logLevel: level?.toUpperCase() }
+          console.debug(JSON.stringify(logMessage))
+        },
+        trace: (o: object) => {
+          const { level } = o as Record<string, string>
+          const logMessage = { ...o, logLevel: level?.toUpperCase() }
+          console.trace(JSON.stringify(logMessage))
+        },
+        fatal: (o: object) => {
+          const { level } = o as Record<string, string>
+          const logMessage = { ...o, logLevel: level?.toUpperCase() }
+          console.error(JSON.stringify(logMessage))
+        },
+        critical: (o: object) => {
+          const { level } = o as Record<string, string>
+          const logMessage = { ...o, logLevel: level?.toUpperCase() }
+          console.error(JSON.stringify(logMessage))
+        },
       },
     }),
   },
