@@ -2,10 +2,29 @@ import pino from 'pino'
 
 const isProd = process.env.NODE_ENV === 'production'
 const isEdge = process.env.NEXT_RUNTIME === 'edge'
-// const frontendOrigin = process.env.NEXT_PUBLIC_FRONTEND_ORIGIN
 const frontendOrigin =
   process.env.NEXT_PUBLIC_FRONTEND_ORIGIN || 'http://localhost:3000'
 const LOG_URL = `${frontendOrigin}/api/log`
+
+// Syslogのログレベルを定義
+const logLevels = {
+  trace: 10,
+  debug: 20,
+  info: 30,
+  warn: 40,
+  error: 50,
+  fatal: 60,
+}
+// ログレベルのkeyを取得する関数
+const getLogLevelValue = (level: string | undefined): string => {
+  let val = 'debug'
+  Object.keys(logLevels).find((key) => {
+    if (logLevels[key as keyof typeof logLevels].toString() === level) {
+      val = key
+    }
+  })
+  return val.toUpperCase()
+}
 
 // ログに含めないフィールドを指定
 const redactParams = [
@@ -27,55 +46,58 @@ const redactParams = [
  *  "requestId": '8ff871b5-5c99-4a6a-9e35-6a8153a7eaba',
  * }
  */
-let n = 0
+// let n = 0
 const pinoCommonConfig = {
   name: 'pino',
   nestedKey: 'context',
-  mixin: () => {
-    return { line: ++n }
-  },
+  customLevels: logLevels,
+  useOnlyCustomLevels: true,
+  // mixin: () => {
+  //   return { line: ++n }
+  // },
   formatters: {
     level: (label: string) => {
-      return { logLevel: label.toUpperCase() }
+      return { level: label.toUpperCase() }
     },
   },
   timestamp: pino.stdTimeFunctions.isoTime,
   browser: {
     ...(isEdge && {
       write: {
-        info: (o: object) => {
+        trace: (o: object) => {
           const { level } = o as Record<string, string>
-          const logMessage = { ...o, logLevel: level?.toUpperCase() }
-          console.log(JSON.stringify(logMessage))
-        },
-        error: (o: object) => {
-          const { level } = o as Record<string, string>
-          const logMessage = { ...o, logLevel: level?.toUpperCase() }
-          console.error(JSON.stringify(logMessage))
-        },
-        warn: (o: object) => {
-          const { level } = o as Record<string, string>
-          const logMessage = { ...o, logLevel: level?.toUpperCase() }
-          console.warn(JSON.stringify(logMessage))
+          const logLevelKey = getLogLevelValue(level)
+          const logMessage = { ...o, level: logLevelKey }
+          console.trace(JSON.stringify(logMessage))
         },
         debug: (o: object) => {
           const { level } = o as Record<string, string>
-          const logMessage = { ...o, logLevel: level?.toUpperCase() }
+          const logLevelKey = getLogLevelValue(level)
+          const logMessage = { ...o, level: logLevelKey }
           console.debug(JSON.stringify(logMessage))
         },
-        trace: (o: object) => {
+        info: (o: object) => {
           const { level } = o as Record<string, string>
-          const logMessage = { ...o, logLevel: level?.toUpperCase() }
-          console.trace(JSON.stringify(logMessage))
+          const logLevelKey = getLogLevelValue(level)
+          const logMessage = { ...o, level: logLevelKey }
+          console.log(JSON.stringify(logMessage))
+        },
+        warn: (o: object) => {
+          const { level } = o as Record<string, string>
+          const logLevelKey = getLogLevelValue(level)
+          const logMessage = { ...o, level: logLevelKey }
+          console.warn(JSON.stringify(logMessage))
+        },
+        error: (o: object) => {
+          const { level } = o as Record<string, string>
+          const logLevelKey = getLogLevelValue(level)
+          const logMessage = { ...o, level: logLevelKey }
+          console.error(JSON.stringify(logMessage))
         },
         fatal: (o: object) => {
           const { level } = o as Record<string, string>
-          const logMessage = { ...o, logLevel: level?.toUpperCase() }
-          console.error(JSON.stringify(logMessage))
-        },
-        critical: (o: object) => {
-          const { level } = o as Record<string, string>
-          const logMessage = { ...o, logLevel: level?.toUpperCase() }
+          const logLevelKey = getLogLevelValue(level)
+          const logMessage = { ...o, level: logLevelKey }
           console.error(JSON.stringify(logMessage))
         },
       },
