@@ -37,14 +37,21 @@ const redactParams = [
 // Pinoの共通設定
 /**
  * 形式
- * {
- *  "level":"info",
- *  "time":"2025-06-12T03:22:19.233Z",
- *  "pid":1971,
- *  "hostname":"243413ab5ad5",
- *  "msg":"Middleware started",
- *  "requestId": '8ff871b5-5c99-4a6a-9e35-6a8153a7eaba',
- * }
+// {
+//   "time": "2025-06-18T07:43:43.485Z",
+//   "level": "INFO",
+//   "message": "middleware started",
+//   "requestId": "9844964e-cfb7-4d87-907b-bd3e55cceae2",
+//   "requestInfo": {
+//     "ip": "::ffff:192.168.97.1",
+//     "method": "POST",
+//     "pathname": "/login",
+//     "searchParams": {},
+//     "device": { "vendor": "Apple", "model": "Macintosh" },
+//     "browser": { "name": "Chrome", "version": "137.0.0.0", "major": "137" },
+//     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+//   }
+// }
  */
 // let n = 0
 const pinoCommonConfig = {
