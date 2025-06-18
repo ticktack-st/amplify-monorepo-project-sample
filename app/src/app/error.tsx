@@ -1,9 +1,9 @@
+'use client'
 interface ErrorProps {
   error: Error & { digest?: string }
-  reset: () => void
 }
 
-export default function Error({ error, reset }: ErrorProps) {
+export default function Error({ error }: ErrorProps) {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-4">
       <div className="text-center">
@@ -16,12 +16,6 @@ export default function Error({ error, reset }: ErrorProps) {
           下のボタンをクリックして再試行してください。
         </p>
         <div className="space-x-4">
-          <button
-            onClick={reset}
-            className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 font-medium text-white transition-colors hover:bg-blue-700"
-          >
-            再試行
-          </button>
           <a
             href="/"
             className="inline-flex items-center rounded-md bg-gray-600 px-4 py-2 font-medium text-white transition-colors hover:bg-gray-700"
