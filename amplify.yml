@@ -41,7 +41,7 @@ applications:
             - pm2 kill
       artifacts:
         baseDirectory: cypress/test
-        configFilePath: "**/mochawesome.json"
+        configFilePath: "cypress/report/**/mochawesome.json"
         files:
           - "cypress/results/**/*.png"
           - "cypress/results/**/*.mp4"
