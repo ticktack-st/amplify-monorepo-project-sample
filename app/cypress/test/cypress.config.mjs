@@ -6,6 +6,7 @@ export default defineConfig({
       // ローカル用環境変数CYPRESS_BASE_URLが設定してある場合はそちらを使用
       if (process.env.CYPRESS_BASE_URL) {
         config.baseUrl = process.env.CYPRESS_BASE_URL
+        config.specPattern = 'src/**/*.cy.ts'
       }
       return config
     },
@@ -16,7 +17,7 @@ export default defineConfig({
     video: true,
     videoCompression: false,
     trashAssetsBeforeRuns: true,
-    specPattern: 'src/**/*.cy.ts',
+    specPattern: 'cypress/test/src/**/*.cy.ts',
     supportFile: false,
   },
 })
