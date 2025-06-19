@@ -14,9 +14,9 @@ export default defineConfig({
       return config
     },
     baseUrl: 'http://localhost:3000',
-    downloadsFolder: 'results/downloads',
-    screenshotsFolder: 'results/screenshots',
-    videosFolder: 'results/videos',
+    downloadsFolder: 'cypress/results/downloads',
+    screenshotsFolder: 'cypress/results/screenshots',
+    videosFolder: 'cypress/results/videos',
     video: true,
     videoCompression: false,
     trashAssetsBeforeRuns: true,
