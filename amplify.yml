@@ -27,6 +27,7 @@ applications:
             - npm ci
             - npm install -g pm2
             - npm install -g wait-on
+            - npm install -g typescript
             - npm install -g cypress
             - npm install mocha mochawesome mochawesome-merge mochawesome-report-generator
             - pm2 start npm -- start
