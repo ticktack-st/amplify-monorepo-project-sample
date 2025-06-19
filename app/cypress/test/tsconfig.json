@@ -1,6 +1,6 @@
 {
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "eslint.config.mjs"],
+  "exclude": ["node_modules", "eslint.config.mjs, cypress.config.mjs"],
   "compileOnSave": false,
   "compilerOptions": {
     "target": "ES2024",

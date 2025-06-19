@@ -5,7 +5,7 @@ import tseslint from 'typescript-eslint'
 export default [
   // global設定
   {
-    ignores: ['node_modules/**/*', 'eslint.config.mjs'],
+    ignores: ['node_modules/**/*', 'eslint.config.mjs', 'cypress.config.mjs'],
   },
   {
     // @typescript-eslintに関する設定
