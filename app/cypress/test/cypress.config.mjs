@@ -5,8 +5,11 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       // ローカル用環境変数CYPRESS_BASE_URLが設定してある場合はそちらを使用
       if (process.env.CYPRESS_BASE_URL) {
-        config.baseUrl = process.env.CYPRESS_BASE_URL
-        config.specPattern = 'src/**/*.cy.ts'
+        ;(config.baseUrl = process.env.CYPRESS_BASE_URL),
+          (config.downloadsFolder = 'results/downloads'),
+          (config.screenshotsFolder = 'results/screenshots'),
+          (config.videosFolder = 'results/videos'),
+          (config.specPattern = 'src/**/*.cy.ts')
       }
       return config
     },

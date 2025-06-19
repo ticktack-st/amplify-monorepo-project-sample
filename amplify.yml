@@ -43,5 +43,5 @@ applications:
         baseDirectory: cypress/test
         configFilePath: "**/mochawesome.json"
         files:
-          - "/results/**/*.png"
-          - "/results/**/*.mp4"
+          - "cypress/results/**/*.png"
+          - "cypress/results/**/*.mp4"
