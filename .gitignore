@@ -11,6 +11,7 @@ app/cypress/results/**
 !app/cypress/results/.gitkeep
 app/cypress/report/**
 !app/cypress/report/.gitkeep
+app/cypress/report/mochawesome-report/.gitkeep
 
 # next.js
 app/.next

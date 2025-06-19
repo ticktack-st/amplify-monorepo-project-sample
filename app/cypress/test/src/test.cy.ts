@@ -5,6 +5,6 @@ describe('The Home Page', () => {
     // h1タグを取得
     cy.get('h1')
       // 中身がhello worldであることを確認
-      .should('contain.text', 'hello world')
+      .should('not.include.text', 'hello')
   })
 })
