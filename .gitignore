@@ -9,6 +9,8 @@ app/storybook-static
 app/*storybook.log
 app/cypress/results/**
 !app/cypress/results/.gitkeep
+app/cypress/report/**
+!app/cypress/report/.gitkeep
 
 # next.js
 app/.next
