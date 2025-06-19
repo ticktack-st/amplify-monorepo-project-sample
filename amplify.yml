@@ -1,6 +1,7 @@
 version: 1
 applications:
-  - backend:
+  - appRoot: app
+    backend:
       phases:
         build:
           commands:
@@ -19,27 +20,29 @@ applications:
         paths:
           - .next/cache/**/*
           - .npm/**/*
-    appRoot: app
-test:
-  phases:
-    preTest:
-      commands:
-        - npm ci
-        - npm install -g pm2
-        - npm install -g wait-on
-        - npm install mocha mochawesome mochawesome-merge mochawesome-report-generator
-        - pm2 start npm -- start
-        - wait-on http://localhost:3000
     test:
-      commands:
-        - 'npx cypress run --reporter mochawesome --reporter-options "reportDir=cypress/report/mochawesome-report,overwrite=false,html=false,json=true,timestamp=mmddyyyy_HHMMss"'
-    postTest:
-      commands:
-        - npx mochawesome-merge cypress/report/mochawesome-report/mochawesome*.json > cypress/report/mochawesome.json
-        - pm2 kill
-  artifacts:
-    baseDirectory: cypress
-    configFilePath: "**/mochawesome.json"
-    files:
-      - "**/*.png"
-      - "**/*.mp4"
+      phases:
+        preTest:
+          commands:
+            - echo 'aaaaaa'
+            - npm ci
+            - npm install -g pm2
+            - npm install -g wait-on
+            - npm install mocha mochawesome mochawesome-merge mochawesome-report-generator
+            - pm2 start npm -- start
+            - wait-on http://localhost:3000
+        test:
+          commands:
+            - echo 'bbbbb'
+            - 'npx cypress run --reporter mochawesome --reporter-options "reportDir=cypress/report/mochawesome-report,overwrite=false,html=false,json=true,timestamp=mmddyyyy_HHMMss"'
+        postTest:
+          commands:
+            - echo 'ccccc'
+            - npx mochawesome-merge cypress/report/mochawesome-report/mochawesome*.json > cypress/report/mochawesome.json
+            - pm2 kill
+      artifacts:
+        baseDirectory: app/cypress/test
+        configFilePath: "**/mochawesome.json"
+        files:
+          - "**/*.png"
+          - "**/*.mp4"
